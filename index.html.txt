@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSE Department Hackathon Portal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans min-h-screen flex flex-col">
+
+    <!-- Navigation Header -->
+    <header class="bg-slate-800 border-b border-slate-700 sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid font-bold text-2xl text-indigo-500 fa-code"></i>
+                <span class="text-xl font-bold tracking-wide text-white">CSE HackHub</span>
+            </div>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium">
+                <button onclick="switchTab('about')" class="hover:text-indigo-400 transition">Overview</button>
+                <button onclick="switchTab('register')" class="hover:text-indigo-400 transition">Team Registration</button>
+                <button onclick="switchTab('submit')" class="hover:text-indigo-400 transition">Project Submission</button>
+                <button onclick="switchTab('leaderboard')" class="hover:text-indigo-400 transition">Leaderboard / Results</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-5xl mx-auto px-4 py-8 flex-grow w-full">
+
+        <!-- TAB 1: OVERVIEW -->
+        <section id="about-tab" class="tab-content space-y-6">
+            <div class="bg-gradient-to-r from-indigo-900 to-slate-800 p-8 rounded-2xl border border-slate-700 text-center shadow-lg">
+                <h1 class="text-4xl font-extrabold text-white mb-3">Department Hackathon 2026</h1>
+                <p class="text-slate-300 text-lg max-w-2xl mx-auto">Build, innovate, and solve real-world problems in 24 hours. Showcase your coding skills!</p>
+                <div class="mt-6 flex justify-center gap-4">
+                    <button onclick="switchTab('register')" class="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-6 py-2.5 rounded-lg shadow-md transition">Register Your Team</button>
+                    <button onclick="switchTab('submit')" class="bg-slate-700 hover:bg-slate-600 text-slate-200 font-semibold px-6 py-2.5 rounded-lg transition">Submit Project</button>
+                </div>
+            </div>
+
+            <!-- Problem Tracks -->
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
+                    <i class="fa-solid fa-brain text-3xl text-indigo-400 mb-3"></i>
+                    <h3 class="text-xl font-semibold text-white">AI & Machine Learning</h3>
+                    <p class="text-slate-400 text-sm mt-2">Predictive modeling, NLP, computer vision, or generative AI applications.</p>
+                </div>
+                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
+                    <i class="fa-solid fa-globe text-3xl text-emerald-400 mb-3"></i>
+                    <h3 class="text-xl font-semibold text-white">Web & Mobile Apps</h3>
+                    <p class="text-slate-400 text-sm mt-2">Full-stack web applications, mobile platforms, or dev tools solving everyday challenges.</p>
+                </div>
+                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
+                    <i class="fa-solid fa-shield-halved text-3xl text-amber-400 mb-3"></i>
+                    <h3 class="text-xl font-semibold text-white">Open Innovation</h3>
+                    <p class="text-slate-400 text-sm mt-2">Cybersecurity, IoT, blockchain, or domain-specific practical automation tools.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: TEAM REGISTRATION -->
+        <section id="register-tab" class="tab-content hidden max-w-xl mx-auto">
+            <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-xl">
+                <h2 class="text-2xl font-bold text-white mb-4"><i class="fa-solid fa-users text-indigo-400 mr-2"></i>Team Registration</h2>
+                <form id="regForm" onsubmit="handleRegister(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Team Name</label>
+                        <input type="text" id="teamName" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-indigo-500" placeholder="e.g. Code Ninjas">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Team Lead Name</label>
+                        <input type="text" id="leadName" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-indigo-500" placeholder="Student Name">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Lead Email / Register No.</label>
+                        <input type="text" id="leadContact" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-indigo-500" placeholder="Register Number / Email">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Team Members (Comma separated)</label>
+                        <input type="text" id="members" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-indigo-500" placeholder="Member 2, Member 3, Member 4">
+                    </div>
+                    <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-lg transition">Complete Registration</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- TAB 3: PROJECT SUBMISSION -->
+        <section id="submit-tab" class="tab-content hidden max-w-xl mx-auto">
+            <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-xl">
+                <h2 class="text-2xl font-bold text-white mb-4"><i class="fa-solid fa-upload text-indigo-400 mr-2"></i>Submit Your Project</h2>
+                <form id="subForm" onsubmit="handleSubmit(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Registered Team Name</label>
+                        <input type="text" id="subTeamName" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-indigo-500" placeholder="Must match your registered name">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Project Title</label>
+                        <input type="text" id="projectTitle" required class="w-full bg-slate-900 border border-slate-900 border-slate-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-indigo-500" placeholder="e.g. AI Attendance System">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">GitHub / Code Repository URL</label>
+                        <input type="url" id="repoUrl" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-indigo-500" placeholder="https://github.com/username/repo">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Brief Description / Problem Solved</label>
+                        <textarea id="projDesc" rows="3" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-indigo-500" placeholder="Summary of what the project does..."></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-lg transition">Submit Project</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- TAB 4: LEADERBOARD / SUBMISSIONS VIEW -->
+        <section id="leaderboard-tab" class="tab-content hidden">
+            <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-xl">
+                <h2 class="text-2xl font-bold text-white mb-4"><i class="fa-solid fa-trophy text-amber-400 mr-2"></i>Submissions & Evaluation</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-slate-700 text-slate-400 text-sm">
+                                <th class="p-3">Team</th>
+                                <th class="p-3">Project Title</th>
+                                <th class="p-3">Repository</th>
+                                <th class="p-3">Score (0-100)</th>
+                                <th class="p-3">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="submissionTable" class="divide-y divide-slate-700 text-sm">
+                            <!-- JS will populate rows -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Simple JS Logic -->
+    <script>
+        // Sample Initial Data
+        let submissions = [
+            { team: "Byte Busters", title: "Smart Exam Hall Allocator", repo: "https://github.com", score: 88 },
+            { team: "AlgoRhythms", title: "Department Event Tracker", repo: "https://github.com", score: 92 }
+        ];
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(tabId + '-tab').classList.remove('hidden');
+            if(tabId === 'leaderboard') renderTable();
+        }
+
+        function handleRegister(e) {
+            e.preventDefault();
+            alert("Registration successful! You can now work on your project and submit it before the deadline.");
+            document.getElementById('regForm').reset();
+            switchTab('submit');
+        }
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            const team = document.getElementById('subTeamName').value;
+            const title = document.getElementById('projectTitle').value;
+            const repo = document.getElementById('repoUrl').value;
+
+            submissions.push({ team, title, repo, score: 0 });
+            alert("Project submitted successfully!");
+            document.getElementById('subForm').reset();
+            switchTab('leaderboard');
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById('submissionTable');
+            tbody.innerHTML = '';
+            submissions.forEach((item, index) => {
+                tbody.innerHTML += `
+                    <tr class="hover:bg-slate-750">
+                        <td class="p-3 font-semibold text-white">${item.team}</td>
+                        <td class="p-3 text-slate-300">${item.title}</td>
+                        <td class="p-3"><a href="${item.repo}" target="_blank" class="text-indigo-400 hover:underline"><i class="fa-solid fa-link mr-1"></i>View Code</a></td>
+                        <td class="p-3 font-bold text-amber-400">${item.score > 0 ? item.score : 'Pending'}</td>
+                        <td class="p-3">
+                            <button onclick="gradeProject(${index})" class="text-xs bg-slate-700 hover:bg-slate-600 text-slate-200 px-3 py-1 rounded">Grade</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function gradeProject(index) {
+            const score = prompt("Enter score out of 100:", submissions[index].score);
+            if (score !== null) {
+                submissions[index].score = parseInt(score) || 0;
+                renderTable();
+            }
+        }
+    </script>
+</body>
+</html>
